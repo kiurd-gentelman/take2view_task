@@ -32,3 +32,12 @@ Route::middleware(['api','auth:api'])->group(function () {
     // Logout user from application
 //    Route::post('/logout', [LoginController::class .'logout']);
 });
+
+Route::middleware(['verify_api'])->group(function () {
+    Route::get('/api-check', function (){
+//        return view('edit_profile');
+        return response()->json(200);
+    });
+});
+
+

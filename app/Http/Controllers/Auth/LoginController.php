@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use JWTAuth;
@@ -64,6 +65,14 @@ class LoginController extends Controller
         }else{
             return redirect('login')->with('error', 'Oppes! You have entered invalid credentials');
         }
+    }
+    public function authLogout(Request $request){
+        return 3;
+        Auth::logout();
+        return $request->wantsJson()
+            ? new JsonResponse([], 204)
+            : redirect('/');
+        return redirect()->to(route('login'));
     }
 
 }

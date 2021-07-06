@@ -87,7 +87,7 @@
 <script>
     function editProfile(){
         let token = '{{session('jwt_token')}}'
-        // let token = 'dhyujftgjktgf'
+//         let token = 'dhyujftgjktgf'
         console.log(token);
         $.ajax({
             url: "/api/check-authenticate-user",
@@ -100,6 +100,11 @@
                 window.location.href = "/edit-profile";
             },
             error: function(err) {
+                console.log(2);
+                console.log(err.responseJSON.message);
+{{--                {{Auth::logout()}}--}}
+                    window.location.href = "/auth-logout";
+                window.location.href = "/login";
                 console.log(err.responseJSON.message);
             },
         });

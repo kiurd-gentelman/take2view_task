@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\HomeController;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -51,6 +53,15 @@ Route::middleware(['web'])->group(function () {
         Route::get('/test', function () {
             echo 'ami asi eikhane';
         });
+
+        Route::get('/auth-logout', function (Request $request) {
+            Auth::logout();
+            return $request->wantsJson()
+                ? new JsonResponse([], 204)
+                : redirect('/');
+        });
+
+//        Route::get('/auth-logout', [LoginController::class, 'authLogout']);
     });
 
     Route::get('/token', function (){

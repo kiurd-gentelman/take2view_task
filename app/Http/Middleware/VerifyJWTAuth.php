@@ -22,6 +22,7 @@ class VerifyJWTAuth
     public function handle(Request $request, Closure $next)
     {
 
+//                dd($header = $request->header('Authorization'));
         if (session('jwt_token') == null){
             Auth::logout();
             return $request->wantsJson()
